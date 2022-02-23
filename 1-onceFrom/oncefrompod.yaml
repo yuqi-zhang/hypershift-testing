@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: machine-config-daemon-oncefrom
+spec:
+  containers:
+  - name: machine-config-daemon-oncefrom
+    image: quay.io/jerzhang/oncefromdaemon:latest
+    command: ["/usr/bin/machine-config-daemon"]
+    args:
+    - "start"
+    - "--skip-reboot"
+    - "--node-name=test"
+    - "--root-mount=/rootfs"
+    - "--once-from=/etc/example.ign"
+    terminationMessagePolicy: FallbackToLogsOnError
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /rootfs
+      name: rootfs
+  hostNetwork: true
+  hostPID: true
+  tolerations:
+    - operator: Exists
+  nodeSelector:
+    kubernetes.io/hostname: ip-10-0-153-72.ec2.internal
+  volumes:
+    - name: rootfs
+      hostPath:
+        path: /
+  restartPolicy: OnFailure

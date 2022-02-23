@@ -1,0 +1,10 @@
+{
+  "ignition": { "version": "3.2.0" },
+  "storage": {
+    "files": [{
+      "path": "/etc/testfile",
+      "mode": 420,
+      "contents": { "source": "data:,test%20file%0A" }
+    }]
+  }
+}

@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: machine-config-daemon-fromdir
+spec:
+  initContainers:
+  - name: machine-config-daemon-fromdir-init
+    image: quay.io/jerzhang/fromdirdaemon:latest
+    command: ["usr/bin/bash","-c","cp /etc/machine-config-daemon/currentConfig.json /rootfs/etc/machine-config-daemon/currentConfig.json && cp /etc/machine-config-daemon/desiredConfig.json /rootfs/etc/machine-config-daemon/desiredConfig.json"]
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /rootfs
+      name: rootfs
+  containers:
+  - name: machine-config-daemon-fromdir
+    image: quay.io/jerzhang/fromdirdaemon:latest
+    command: ["/usr/bin/machine-config-daemon"]
+    args:
+    - "start"
+    - "--node-name=test"
+    - "--root-mount=/rootfs"
+    - "--from-dir=/etc/machine-config-daemon"
+    terminationMessagePolicy: FallbackToLogsOnError
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /rootfs
+      name: rootfs
+  hostNetwork: true
+  hostPID: true
+  tolerations:
+    - operator: Exists
+  nodeSelector:
+    kubernetes.io/hostname: ip-10-0-131-102.ec2.internal
+  volumes:
+    - name: rootfs
+      hostPath:
+        path: /
+  restartPolicy: OnFailure

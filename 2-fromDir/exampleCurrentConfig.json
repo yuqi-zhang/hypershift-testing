@@ -1,0 +1,16 @@
+{
+    "apiVersion": "machineconfiguration.openshift.io/v1",
+    "kind": "MachineConfig",
+    "spec": {
+        "config": {
+            "ignition": {
+                "version": "3.2.0"
+            }
+        },
+        "extensions": [],
+        "fips": false,
+        "kernelArguments": [],
+        "kernelType": "default",
+        "osImageURL": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:1b5db764a79066c90a06f05efe2bc69ab974391edffbfe155f01996c133a848c"
+    }
+}
