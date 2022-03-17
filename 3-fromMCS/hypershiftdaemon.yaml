@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: machine-config-daemon-hypershift
+  namespace: openshift-machine-config-operator
+spec:
+  containers:
+  - name: machine-config-daemon-hypershift
+    image: quay.io/jerzhang/hypershiftdaemon:latest
+    command: ["/usr/bin/machine-config-daemon"]
+    args:
+    - "start"
+    - "--node-name=ip-10-0-133-186.ec2.internal"
+    - "--root-mount=/rootfs"
+    - "--hypershift=https://api-int.jerzhang-220317-test.devcluster.openshift.com:22623/config/worker"
+    env:
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    terminationMessagePolicy: FallbackToLogsOnError
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /rootfs
+      name: rootfs
+  hostNetwork: true
+  hostPID: true
+  serviceAccountName: machine-config-daemon
+  tolerations:
+    - operator: Exists
+  nodeSelector:
+    kubernetes.io/hostname: ip-10-0-133-186.ec2.internal
+  volumes:
+    - name: rootfs
+      hostPath:
+        path: /
+  restartPolicy: Never
