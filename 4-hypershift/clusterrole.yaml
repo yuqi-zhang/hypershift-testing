@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: machine-config-daemon-hypershift
+  namespace: hypershift-mco
+rules:
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["get", "list", "watch", "patch", "update"]
+- apiGroups: [""]
+  resources: ["pods/eviction"]
+  verbs: ["create"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
+- apiGroups: ["extensions"]
+  resources: ["daemonsets"]
+  verbs: ["get"]
+- apiGroups: ["apps"]
+  resources: ["daemonsets"]
+  verbs: ["get"]
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["get"]

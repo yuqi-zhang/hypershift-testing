@@ -1,0 +1,25 @@
+apiVersion: hypershift.openshift.io/v1alpha1
+kind: NodePool
+metadata:
+  name: inplace-demo
+  namespace: clusters
+spec:
+  clusterName: example
+  management:
+    autoRepair: false
+    upgradeType: InPlace
+  nodeCount: 2
+  platform:
+    aws:
+      instanceProfile: example-8xkpk-worker
+      instanceType: m5.large
+      rootVolume:
+        size: 120
+        type: gp3
+      securityGroups:
+        - id: sg-03299093cf13cd019
+      subnet:
+        id: subnet-0fbd4d95ed19c1350
+    type: AWS
+  release:
+    image: quay.io/openshift-release-dev/ocp-release:4.10.6-x86_64
