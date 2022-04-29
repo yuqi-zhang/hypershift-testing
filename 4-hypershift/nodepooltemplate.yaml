@@ -11,15 +11,15 @@ spec:
   nodeCount: 2
   platform:
     aws:
-      instanceProfile: example-8xkpk-worker
+      instanceProfile: example-d4jhf-worker
       instanceType: m5.large
       rootVolume:
         size: 120
         type: gp3
       securityGroups:
-        - id: sg-03299093cf13cd019
+        - id: sg-0e72abb1084c06be9
       subnet:
-        id: subnet-0fbd4d95ed19c1350
+        id: subnet-0cfaadbcce790d335
     type: AWS
   release:
     image: quay.io/openshift-release-dev/ocp-release:4.10.6-x86_64

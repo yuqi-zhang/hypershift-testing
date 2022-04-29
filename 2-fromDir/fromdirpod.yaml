@@ -32,7 +32,7 @@ spec:
   tolerations:
     - operator: Exists
   nodeSelector:
-    kubernetes.io/hostname: ip-10-0-131-102.ec2.internal
+    kubernetes.io/hostname: ip-10-0-134-212.ec2.internal
   volumes:
     - name: rootfs
       hostPath:

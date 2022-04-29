@@ -7,19 +7,24 @@ spec:
   clusterName: example
   management:
     autoRepair: false
+    replace:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      strategy: RollingUpdate
     upgradeType: InPlace
   nodeCount: 2
   platform:
     aws:
-      instanceProfile: example-d8fth-worker
+      instanceProfile: example-hcpm2-worker
       instanceType: m5.large
       rootVolume:
         size: 120
         type: gp3
       securityGroups:
-        - id: sg-0f9ce709d7aeaabd5
+        - id: sg-02fb16550fa3a06eb
       subnet:
-        id: subnet-0987bfd6790845eb8
+        id: subnet-0a344cf8cd922981c
     type: AWS
   release:
-    image: quay.io/openshift-release-dev/ocp-release:4.10.6-x86_64
+    image: quay.io/openshift-release-dev/ocp-release:4.10.8-x86_64

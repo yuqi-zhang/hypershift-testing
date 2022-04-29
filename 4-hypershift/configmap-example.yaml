@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: desired-config
+  namespace: hypershift-mco
+data:
+  config: |
+    apiVersion: machineconfiguration.openshift.io/v1
+    kind: MachineConfig
+    metadata:
+      labels:
+        machineconfiguration.openshift.io/role: worker
+      name: rendered-worker-xxx
+    spec:
+      config:
+        ignition:
+          version: 3.2.0
+        passwd:
+          users:
+          - name: core
+      extensions: null
+      fips: false
+      kernelArguments: null
+      kernelType: ""
+      osImageURL: ""

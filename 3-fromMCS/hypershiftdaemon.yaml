@@ -10,9 +10,9 @@ spec:
     command: ["/usr/bin/machine-config-daemon"]
     args:
     - "start"
-    - "--node-name=ip-10-0-133-186.ec2.internal"
+    - "--node-name=ip-10-0-139-190.ec2.internal"
     - "--root-mount=/rootfs"
-    - "--hypershift=https://api-int.jerzhang-220317-test.devcluster.openshift.com:22623/config/worker"
+    - "--hypershift=https://api-int.jerzhang-220321-test.devcluster.openshift.com:22623/config/worker"
     env:
     - name: POD_NAME
       valueFrom:
@@ -30,7 +30,7 @@ spec:
   tolerations:
     - operator: Exists
   nodeSelector:
-    kubernetes.io/hostname: ip-10-0-133-186.ec2.internal
+    kubernetes.io/hostname: ip-10-0-139-190.ec2.internal
   volumes:
     - name: rootfs
       hostPath:
