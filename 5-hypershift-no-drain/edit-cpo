@@ -1,0 +1,4 @@
+oc edit hostedcluster/example -n clusters
+
+annotations:
+    hypershift.openshift.io/control-plane-operator-image: quay.io/jerzhang/hypershift-control-plane-operator:latest

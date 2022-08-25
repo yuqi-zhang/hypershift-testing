@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-machineconfig-osimage
+  namespace: clusters
+data:
+  config: |
+    apiVersion: machineconfiguration.openshift.io/v1
+    kind: MachineConfig
+    metadata:
+      labels:
+        machineconfiguration.openshift.io/role: worker
+      name: 99-test-osimage
+    spec:
+      osImageURL: quay.io/jerzhang/rhcos-override:latest
+      config:
+        ignition:
+          version: 3.2.0
