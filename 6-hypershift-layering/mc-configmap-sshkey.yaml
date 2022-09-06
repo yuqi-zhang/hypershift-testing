@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-machineconfig-passwd
+  namespace: clusters
+data:
+  config: |
+    apiVersion: machineconfiguration.openshift.io/v1
+    kind: MachineConfig
+    metadata:
+      labels:
+        machineconfiguration.openshift.io/role: worker
+      name: 99-test
+    spec:
+      config:
+        ignition:
+          version: 3.2.0
+        passwd:
+          users:
+          - name: core
+            sshAuthorizedKeys:
+            - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUq7W38xCZ9WGSWCvustaMGMT04tRohw6AKGzI7P7xql5lhCAReyt72n9qWQRZsE1YiCSQuTfXI1oc8NpSM7+lMLwj12G8z3I1YT31JHr9LLYg/XIcExkzfBI920CaS82VqmKOpI9+ARHSJBdIbKRI0f5Y+u4xbc5UzKCJX8jcKGG7nEiw8zm+cvAlfOgssMK+qJppIbVcb2iZNTsw5i2aX6FDMyC+b17DQHzBGpNbhZYxuoERZVRcnYctgIzuo6fD60gniX0fVvrchlOnubB1sRYbloP2r6UE22w/dpLKOFE5i7CA0ZzNBERZ94cIKumIH9MiJs1a6bMe89VOjjNV
